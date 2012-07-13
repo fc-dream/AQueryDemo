@@ -1,4 +1,4 @@
-package com.lbi.aquery.activities;
+package com.lbi.aquerydemo.activities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +9,8 @@ import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
 import com.androidquery.util.AQUtility;
 import com.androidquery.util.XmlDom;
-import com.lbi.aquery.R;
-import com.lbi.aquery.R.id;
-import com.lbi.aquery.R.layout;
-import com.lbi.aquery.R.menu;
-import com.lbi.aquery.entities.Feed;
+import com.lbi.aquerydemo.R;
+import com.lbi.aquerydemo.entities.Feed;
 
 import android.os.Bundle;
 import android.app.Activity;

@@ -1,4 +1,4 @@
-package com.lbi.aquery.entities;
+package com.lbi.aquerydemo.entities;
 
 import java.util.Date;
 
