@@ -1,15 +1,13 @@
 package com.lbi.aquerydemo.entities;
 
-import java.util.Date;
-
 public class Feed {
 
 	private String title;
 	private String description;
-	private Date pubDate;
+	private String pubDate;
 	private String thumbnailUrl;
 	
-	public String getTitle() {
+    public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
@@ -21,10 +19,10 @@ public class Feed {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Date getPubDate() {
+	public String getPubDate() {
 		return pubDate;
 	}
-	public void setPubDate(Date pubDate) {
+	public void setPubDate(String pubDate) {
 		this.pubDate = pubDate;
 	}
 	public String getThumbnailUrl() {
@@ -33,4 +31,10 @@ public class Feed {
 	public void setThumbnailUrl(String thumbnailUrl) {
 		this.thumbnailUrl = thumbnailUrl;
 	}	
+
+	@Override
+	public String toString() {
+	    return "Feed [title=" + title + ", description=" + description +
+	            ", pubDate=" + pubDate + ", thumbnailUrl=" + thumbnailUrl + "]";
+	}
 }
