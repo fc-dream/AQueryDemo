@@ -376,7 +376,7 @@
       <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/61476000/jpg/_61476143_ibsen_women_small1.jpg"/> 
     </item> 
     <item> 
-      <title>[FAKE ITEM]</title>  
+      <title>[FAKE ITEM With Fallback Image]</title>  
       <description>The enduring power of Hedda and Nora</description>  
       <link>http://www.bbc.co.uk/news/entertainment-arts-18745130#sa-ns_mchannel=rss&amp;ns_source=PublicRSS20-sa</link>  
       <guid isPermaLink="false">http://www.bbc.co.uk/news/entertainment-arts-18745130</guid>  
