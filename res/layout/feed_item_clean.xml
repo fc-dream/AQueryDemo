@@ -2,35 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="75dip" >
-    
-    <RelativeLayout
-        android:id="@+id/thumbnail_wrap"
+ 
+    <ImageView
+        android:id="@+id/feed_thumbnail"
         android:layout_width="75dip"
-        android:layout_height="75dip" >
-    
-	    <ProgressBar
-	        android:id="@+id/feed_thumbnail_progress"
-	        android:layout_width="20dip"
-	        android:layout_height="20dip"
-	        android:layout_centerInParent="true"
-	        android:contentDescription="@string/thumbnail_progress_alt"
-	        android:visibility="gone" />
-		
-	    <ImageView
-	        android:id="@+id/feed_thumbnail"
-	        android:layout_width="75dip"
-	        android:layout_height="75dip"
-	        android:contentDescription="@string/thumbnail_alt"
-	         />
-        
-    </RelativeLayout>
+        android:layout_height="75dip"
+        android:contentDescription="@string/thumbnail_alt"
+         />
         
 	<TextView
 	    android:id="@+id/feed_title"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_alignWithParentIfMissing="true"
-	    android:layout_toRightOf="@id/thumbnail_wrap"
+	    android:layout_toRightOf="@id/feed_thumbnail"
 	    android:maxLines="2"
 	    android:paddingLeft="6dip"
 	    android:paddingRight="6dip"
@@ -44,7 +29,8 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_below="@+id/feed_title"
-		android:layout_toRightOf="@id/thumbnail_wrap"
+		android:layout_toRightOf="@id/feed_thumbnail"
 	    android:paddingLeft="6dip"
 	    android:text="@string/date_preview" />
+
 </RelativeLayout>

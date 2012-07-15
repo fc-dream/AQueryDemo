@@ -1,8 +1,6 @@
 package com.lbi.aquerydemo.activities;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import org.xmlpull.v1.XmlPullParser;
 
 import com.androidquery.AQuery;
@@ -10,7 +8,6 @@ import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 import com.androidquery.callback.BitmapAjaxCallback;
 import com.androidquery.util.AQUtility;
-import com.androidquery.util.XmlDom;
 import com.lbi.aquerydemo.R;
 import com.lbi.aquerydemo.adapters.FeedListAdapter;
 import com.lbi.aquerydemo.entities.Feed;
@@ -20,23 +17,20 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.support.v4.app.NavUtils;
+import android.widget.Toast;
 
 public class FeedsActivity extends Activity {
 
     private AQuery $$;
     private ProgressDialog progressDialog;
-    private List<Feed> feedItems;
     private ArrayAdapter<Feed> feedAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // default is 4
-        AjaxCallback.setNetworkLimit(30);
-        // default is 20
-        BitmapAjaxCallback.setCacheLimit(80);
+        
+        AjaxCallback.setNetworkLimit(14);// default is 4        
+        BitmapAjaxCallback.setCacheLimit(80);// default is 20
 
         super.onCreate(savedInstanceState);
 
@@ -45,28 +39,23 @@ public class FeedsActivity extends Activity {
         $$ = new AQuery(FeedsActivity.this);
         $$.id(R.id.textView1).text("Hello Aquery!!");
 
-        /*feedAdapter = new FeedListAdapter(FeedsActivity.this,
-                R.layout.feed_item, new ArrayList<Feed>(), $$);
-*/
+        feedAdapter = new FeedListAdapter(FeedsActivity.this, R.layout.feed_item, new ArrayList<Feed>(), $$);
+
         progressDialog = new ProgressDialog(FeedsActivity.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(true);
         progressDialog.setInverseBackgroundForced(false);
         progressDialog.setCanceledOnTouchOutside(true);
         progressDialog.setTitle("Fetching Feeds...");
+        progressDialog.setMessage("Please wait or touch to cancel");
 
-        // String xmlFeedUrl = "http://feeds.bbci.co.uk/news/rss.xml";
-        String xmlFeedUrl = "http://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml";
-        // String xmlFeedUrl =
-        // "https://raw.github.com/cpeppas/AQueryDemo/master/feeds.xml";
-        $$.progress(progressDialog).ajax(xmlFeedUrl, XmlPullParser.class, this,
-                "xmlPullParserCallback");
+        String xmlFeedUrl = "https://raw.github.com/cpeppas/AQueryDemo/master/bbc_demo.xml";
+        long expire = 15 * 60 * 1000;
+        $$.progress(progressDialog).ajax(xmlFeedUrl, XmlPullParser.class, expire, this, "xmlPullParserCallback");
 
     }
 
-    public void xmlPullParserCallback(String url, XmlPullParser xpp,
-            AjaxStatus status) {
-        feedItems = new ArrayList<Feed>();
+    public void xmlPullParserCallback(String url, XmlPullParser xpp, AjaxStatus status) {
         Feed feedItem = null;
         try {
             int eventType = xpp.getEventType();
@@ -79,27 +68,24 @@ public class FeedsActivity extends Activity {
                             feedItem.setTitle(xpp.nextText());
                         } else if ("pubDate".equals(xpp.getName())) {
                             feedItem.setPubDate(xpp.nextText());
-                        } else if ("thumbnail".equals(xpp.getName()) &&
-                                "144".equals(xpp.getAttributeValue(null,
-                                        "width"))) {
-                            feedItem.setThumbnailUrl(xpp.getAttributeValue(
-                                    null, "url"));
+                        } else if ("thumbnail".equals(xpp.getName()) && "144".equals(xpp.getAttributeValue(null,"width"))) {
+                            feedItem.setThumbnailUrl(xpp.getAttributeValue(null, "url"));
                         }
                     }
-                } else if (eventType == XmlPullParser.END_TAG &&
-                        feedItem != null && "item".equals(xpp.getName())) {
-                    feedItems.add(feedItem);
-                    //feedAdapter.add(feedItem);
-                    //feedAdapter.notifyDataSetChanged();
+                } else if (eventType == XmlPullParser.END_TAG && feedItem != null && "item".equals(xpp.getName())) {
+                    feedAdapter.add(feedItem);
+                    feedAdapter.notifyDataSetChanged();
                 }
                 eventType = xpp.next();
-            }
-            // $$.id(R.id.textView1).text("feeds size: " + feedItems.size());
-            $$.id(R.id.feed_list).adapter(new FeedListAdapter(FeedsActivity.this, R.layout.feed_item, feedItems, $$) );
-            //$$.id(R.id.feed_list).adapter(feedAdapter);
+            }            
+            $$.id(R.id.textView1).text(" "+feedAdapter.getCount()+" rss items are fetched on "+status.getDuration()+"ms");
+            $$.id(R.id.feed_list).adapter(feedAdapter);
         }
         catch (Exception e) {
             AQUtility.report(e);
+            if(status.getCode() == AjaxStatus.NETWORK_ERROR){
+                Toast.makeText(FeedsActivity.this, " Network error - Internet connection is not active", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -110,13 +96,12 @@ public class FeedsActivity extends Activity {
     }
 
     protected void onDestroy() {
-
         super.onDestroy();
         // clean the file cache when root activity exit
         // the resulting total cache size will be less than 3M
         if (isTaskRoot()) {
             AQUtility.cleanCacheAsync(this);
         }
+        Log.i(FeedsActivity.class.getName()," onDestroy is invoked - Cache is now cleared!!");
     }
-
 }

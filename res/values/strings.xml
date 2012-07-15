@@ -3,7 +3,7 @@
     <string name="app_name">AQueryDemo</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">AQueryDemo</string>
     <!-- Lorem Ipsum -->
     <string name="text_preview">Europe\'s Leaders Fear Libya Could Become Next Afghanistan</string>
     <string name="date_preview">March 29th, 2010. 09:34 AM</string>
