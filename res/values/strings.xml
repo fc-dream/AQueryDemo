@@ -10,6 +10,7 @@
     
 	<!-- Content Descriptions  -->
     <string name="thumbnail_alt">feed item thumbnail</string>
+    <string name="mainimage_alt">feed item main image</string>
     <string name="thumbnail_progress_alt">thumbnail image loading animation</string>
 	
 </resources>

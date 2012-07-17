@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/feed_main_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="6dip"
+        android:layout_marginTop="14dp"
+        android:text="@string/text_preview"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android:id="@+id/feed_main_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/feed_main_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:contentDescription="@string/mainimage_alt"
+        android:src="@drawable/ic_launcher" />
+
+
+    <TextView
+        android:id="@+id/feed_pubdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/feed_main_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/date_preview"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/feed_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/feed_pubdate"
+        android:paddingLeft="6dip"
+        android:layout_marginTop="18dp"
+        android:text="@string/text_preview"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+</RelativeLayout>

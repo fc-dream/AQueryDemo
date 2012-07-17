@@ -6,6 +6,7 @@ public class Feed {
 	private String description;
 	private String pubDate;
 	private String thumbnailUrl;
+	private String mainImageUrl;
 	
     public String getTitle() {
 		return title;
@@ -30,9 +31,14 @@ public class Feed {
 	}
 	public void setThumbnailUrl(String thumbnailUrl) {
 		this.thumbnailUrl = thumbnailUrl;
-	}	
-
-	@Override
+	}		
+	public String getMainImageUrl() {
+        return mainImageUrl;
+    }
+    public void setMainImageUrl(String mainImageUrl) {
+        this.mainImageUrl = mainImageUrl;
+    }
+    @Override
 	public String toString() {
 	    return "Feed [title=" + title + ", description=" + description +
 	            ", pubDate=" + pubDate + ", thumbnailUrl=" + thumbnailUrl + "]";
