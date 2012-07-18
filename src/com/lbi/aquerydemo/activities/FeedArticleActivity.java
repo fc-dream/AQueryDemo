@@ -22,7 +22,7 @@ public class FeedArticleActivity extends Activity {
             $.id(R.id.feed_main_title).text(extras.getString("feedTitle"));
             $.id(R.id.feed_description).text(extras.getString("feedDescription"));
             $.id(R.id.feed_pubdate).text(extras.getString("feedPubDate"));
-            $.id(R.id.feed_main_image).image(extras.getString("feedMainImageUrl"), true, true, 0, R.drawable.ic_launcher, null, AQuery.FADE_IN);
+            $.id(R.id.feed_main_image).image(extras.getString("feedMainImageUrl"), true, true, 0, R.drawable.ic_launcher, null, AQuery.FADE_IN, AQuery.RATIO_PRESERVE);
         }
 
     }
